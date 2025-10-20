@@ -54,4 +54,10 @@ Some aspects of the scope outlined below are based on the CoalLog Standard that 
 * Development of suggested templates 
 * Development of User guide(s)   
 * API format 
-* Stakeholder engagement with major metallurgical labs 
+* Stakeholder engagement with major metallurgical labs
+
+## Out of Scope ##
+* Geotechnical and structural data
+* The guideline will include data from automated mineralogy but will exclude data formats that cannot easily interact with the manufacturer (i.e., MLA data)
+* tQEMSCAN data
+* Chemical analysis and reporting  
