@@ -27,31 +27,31 @@ Some aspects of the scope outlined below are based on the CoalLog Standard that 
 
 ## In Scope ##
 
-: Development of Guiding/Design Principles with a standardised format/terminology for the most common terms that can be applied universally.
-: Development of Guiding/Design Principles with a standardised format/terminology for the most common terms that can be applied universally.  
-: Prioritisation list  
-: Data layout: A great example of a very successful global data layout is the LAS file put together by the Canadian Well Logging Society: https://www.cwls.org/wp-content/uploads/2014/09/LAS_20_Update_Jan2014.pdf (Not recommending this by far btw as it has many failing in its scalability, but a modernisation of this would be ideal) 
-: Glossary/ Codes (including differing sample origins, sample characteristics, test parameters and results)/Terminology 
-: Results file formats  
-: Data transfer format 
-: File names for transfer files 
-: Common metallurgical and geometallurgical tests for: 
-: Comminution  
-: Flotation  
-: Leaching  
-: Heap leaching  
-: ARD and waste management  
-: Common Iron Ore ISO tests (RI, RDI, TI etc.)  
-: Mineralogy including but not limited to: 
-: Automated mineralogy  
-: X-ray diffraction 
-: Hyperspectral  
-: Association 
-: Liberation (may need to be collected in 10% buckets only)  
-: PSD 
-: GSD 
-: Shape factor 
-: Development of suggested templates 
-: Development of User guide(s)   
-: API format 
-: Stakeholder engagement with major metallurgical labs 
+* Development of Guiding/Design Principles with a standardised format/terminology for the most common terms that can be applied universally.
+* Development of Guiding/Design Principles with a standardised format/terminology for the most common terms that can be applied universally.  
+* Prioritisation list  
+* Data layout: A great example of a very successful global data layout is the LAS file put together by the Canadian Well Logging Society: https://www.cwls.org/wp-content/uploads/2014/09/LAS_20_Update_Jan2014.pdf (Not recommending this by far btw as it has many failing in its scalability, but a modernisation of this would be ideal) 
+* Glossary/ Codes (including differing sample origins, sample characteristics, test parameters and results)/Terminology 
+* Results file formats  
+* Data transfer format 
+* File names for transfer files 
+* Common metallurgical and geometallurgical tests for: 
+* Comminution  
+* Flotation  
+* Leaching  
+* Heap leaching  
+* ARD and waste management  
+* Common Iron Ore ISO tests (RI, RDI, TI etc.)  
+* Mineralogy including but not limited to: 
+* Automated mineralogy  
+* X-ray diffraction 
+* Hyperspectral  
+* Association 
+* Liberation (may need to be collected in 10% buckets only)  
+* PSD 
+* GSD 
+* Shape factor 
+* Development of suggested templates 
+* Development of User guide(s)   
+* API format 
+* Stakeholder engagement with major metallurgical labs 
