@@ -1,0 +1,113 @@
+Category,Parameter ID (na spaces allowed),Parameter description,Unit,Conditional,To be discussed
+"Report Header
+",TestID,,,,
+"Report metadata
+This should include all metadata related to the test itself, points that are of responsibility of the laboratory. 
+This metadata gives the report context.",Laboratory,,,,
+,TestType,,,,
+,Technician,,,,
+,Date,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"Sample
+",SampleID,Sample ID,,,
+"This is the sample metadata. There may be different types of sample metadata such as:
+- Measured properties (e.g. moisture content, mass)
+- Reported properties (e.g. ore type, lithology, location)
+Note that for ""Reported properties"", a lab will only report back what they have received from a mining company.",P_SampleID,ID Parent sample,,,
+,,Ore Type / Mineralogy,,,"This can be answered in too many ways. We need to rephrase this parameter to be more specific. If needed, even split it into more rows"
+,,"Particle Size Distribution (e.g., d80, P80)",,,
+,,Moisture Content,,,
+,,Agglomeration (yes/no),,if test type == heap,
+,,Additive (e.g. cement),,if test type == heap,
+,,Pellet size (mm),,if test type == heap,
+,,"Grades of feed sample (e.g., %Cu, g/t Au)",,,"I think this should be part of the mineralogy report of the sample, otherwise it will be repretitive. But we need to ""draw the line"" together. The same applies to the product grades"
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"Test | Parameters
+",,Mass of Sample Used,,,
+"The test will have Parameters recorded when it is run. Parameters are the controlled input variables key to the test procedure that give context and meaning to the test results. The Parameters of interest will vary based on the type of test. 
+May be defined (e.g. target pH) or observed (measured pH).",,"Type of Lixiviant (e.g., H?SO?, NaCN, NH?OH)",,,
+,,Concentration of Lixiviant (mol/L or % w/v),,,
+,,Volume of Solution Used,,,
+,,Temperature (ambient or controlled),,,
+,,Pressure (ambiant or controlled for autoclave tests),,,
+,,"Atmosphere (air, oxygen)",,,
+,,Aeration/Ventilation (Air or oxygen flow conditions),,if test type == heap,
+,,Redox Potential Eh (target),,,
+,,Solid-to-Liquid Ratio (w/w or v/v),,,
+,,pH of Solution (target),,,
+,,"Leach Vessel Type (e.g., beaker, rolling bottle)",,,
+,,"Agitation Speed / Type (rpm, mechanical or magnetic)",,if test type == agitated,
+,,Leach Vessel height,,,
+,,Leach Vessel diameter,,,
+,,Leach Vessel Type Volume,,,
+,,Stage Names (IDs),,,
+,,Permeability/Packing (Variable along the column or constant?),,if test type == heap,
+,,Packing Density (Ore compaction Level),,if test type == heap,
+,,"Liner Material (e.g., PVC))",,if test type == heap,
+,,Irrigation Application Method (e.g. Drip irrigation),,if test type == heap,
+,,"Irrigation Cycle Type (e.g., continuous)",,if test type == heap,
+,,Cure Dosage,,if test type == heap,I don`t know what this means
+,,Cure Cycle,,if test type == heap,I don`t know what this means
+,,Humidity,,if test type == heap ,I don`t know where this is to be measured
+,,Filtration Method,,,
+,,Sampling along the column (yes/no),,if test type == heap,
+,,End Criteria (Recovery plateau),,if test type == heap,does this also apply to agitated leaching?
+,,Test type (agitated or heap),,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"Test | Stage | Parameters
+",,"Reagent addition type (e.g., pH modifier, oxidizing agent, surfactants)",,,
+"For each stage, Parameters (controlled input variables) may be recorded, such as the observed/measured conditions or the reagents added.
+There may be a single record for Stage Parameters, or there may be a series of records (where data is recorded on a time interval or during/after cycles).",,"Reagent addition concentration (e.g., pH modifier, oxidizing agent, surfactants)",,,
+,,"Reagent addition volume (e.g., pH modifier, oxidizing agent, surfactants)",,,
+,,"Stage time (e.g., sampling interval / pre-conditioning time)",,,
+,,Irrigation Flow Rate,,if test type == heap,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"Test | Stage | Outputs
+",,pH of Solution (measured at the beginning of each stage),,,
+"Measured/Observed/Controlled outcomes from a test stage. There may be a single record for Stage Outputs, or there may be a series of records (where data is recorded on a time interval or during/after cycles).",,Redox Potential Eh (measured at the beginning of each stage),,,
+,,Temperature (measured at the beginning of each stage),,,
+,,Volume of Sample Collected,,,
+,,"Child sample IDs (to be forwarded to analytics, for example)",,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"Test | Outputs
+Measured/Observed/Controlled outcomes from a test.",,Residue Assay,,,"I think this should be part of the mineralogy report of the sample, otherwise it will be repretitive. But we need to ""draw the line"" together. The same applies to the product grades"
+Measured/Observed/Controlled outcomes from a test.,,Residue mass,g,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"Test | Results
+",,Metal Recovery (%),,,
+Key results or findings for the overall test,,Leaching Rate / Kinetics,,,
+,,Reagent Consumption,,,Is this important for each stage? Or as a whole?
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,

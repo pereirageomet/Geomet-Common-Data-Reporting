@@ -1,0 +1,111 @@
+/* Font & transitions */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
+}
+.navbar-brand span {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Cards */
+.card {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Body background and text */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Navbar dark */
+body.dark-mode .navbar {
+  background-color: #1f1f1f !important;
+  color: #e0e0e0 !important;
+}
+
+/* Card background */
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Buttons */
+body.dark-mode .btn-outline-primary {
+  color: #bbdefb;
+  border-color: #bbdefb;
+}
+body.dark-mode .btn-outline-primary:hover {
+  background-color: #bbdefb;
+  color: #121212;
+}
+
+body.dark-mode .btn-success {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: #fff;
+}
+
+/* Tables */
+body.dark-mode .table {
+  color: #e0e0e0;
+}
+body.dark-mode .table th {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+/* Header in dark mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: #ffffff;
+}
+
+/* Navbar text in dark mode */
+body.dark-mode .navbar,
+body.dark-mode .navbar-brand,
+body.dark-mode .navbar-brand span {
+  color: #ffffff !important;
+}
+
+/* Optional: navbar links (tabs) */
+body.dark-mode .nav-link {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .nav-link.active {
+  color: #ffffff !important;
+  background-color: #1e1e1e !important;
+}
+
+
+
+.tab-pane {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  display: block; /* keep display block for animation */
+  height: auto;
+}
+
+.tab-pane.show.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
+}

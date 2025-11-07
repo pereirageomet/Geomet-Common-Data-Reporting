@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometallurgy Data Reporting Guidelines</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar with logo and dark mode toggle -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="assets/gmg.png" alt="GMG Logo" height="40" class="me-2">
+        <span>Geomet Data Reporting Guidelines</span>
+      </a>
+      <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm ms-auto">
+        🌙 Dark Mode
+      </button>
+    </div>
+  </nav>
+
+
+  <div class="container py-5">
+
+    <h1 class="mb-4 text-center">Geometallurgy Data Reporting Guidelines</h1>
+
+    <!-- 1. Introduction -->
+    <section id="intro" class="mb-5">
+      <div id="intro-text"></div>
+    </section>
+
+    <!-- 2. Glossary -->
+    <section id="glossary" class="mb-5">
+      <div id="glossary-expl"></div>
+      <input id="glossary-search" class="form-control mt-3" placeholder="Search glossary..." />
+      <table class="table table-striped mt-3" id="glossary-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 3–6. Guidelines with tabs -->
+    <section id="guidelines" class="mb-5">
+      <ul class="nav nav-tabs" id="guidelineTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="comminution-tab" data-bs-toggle="tab" data-bs-target="#comminution" type="button" role="tab">Comminution</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="flotation-tab" data-bs-toggle="tab" data-bs-target="#flotation" type="button" role="tab">Flotation</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="leaching-tab" data-bs-toggle="tab" data-bs-target="#leaching" type="button" role="tab">Leaching</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="mineralogy-tab" data-bs-toggle="tab" data-bs-target="#mineralogy" type="button" role="tab">Mineralogy</button>
+        </li>
+      </ul>
+
+      <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="comminution" role="tabpanel">
+          <div class="card p-3 mb-3">
+            <div id="comminution-expl"></div>
+            <a href="data/comminution.csv" download class="btn btn-outline-primary mt-2">Download Comminution Guideline</a>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="flotation" role="tabpanel">
+          <div class="card p-3 mb-3">
+            <div id="flotation-expl"></div>
+            <a href="data/flotation.csv" download class="btn btn-outline-primary mt-2">Download Flotation Guideline</a>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="leaching" role="tabpanel">
+          <div class="card p-3 mb-3">
+            <div id="leaching-expl"></div>
+            <a href="data/leaching.csv" download class="btn btn-outline-primary mt-2">Download Leaching Guideline</a>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="mineralogy" role="tabpanel">
+          <div class="card p-3 mb-3">
+            <div id="mineralogy-expl"></div>
+            <a href="data/mineralogy.csv" download class="btn btn-outline-primary mt-2">Download Mineralogy Guideline</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Feedback -->
+    <section id="feedback" class="mb-5">
+      <div id="feedback-expl"></div>
+      <a href="https://github.com/gmggroup/Geomet-Common-Data-Reporting/issues/new" 
+         target="_blank" 
+         class="btn btn-success mt-3">
+        Suggest via GitHub
+      </a>
+    </section>
+
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Main Script -->
+  <script src="assets/script.js"></script>
+
+</body>
+</html>
