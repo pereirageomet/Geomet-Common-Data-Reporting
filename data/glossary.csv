@@ -1,7 +1,7 @@
-Term,Definition
-Bond Work Index,"A measure of ore hardness used to estimate energy requirements for grinding."
-Comminution,"The process of reducing solid materials in size by crushing or grinding."
-Liberation,"The degree to which valuable minerals are separated from gangue."
-Throughput,"The amount of material processed in a given period of time."
-Feed Size,"The initial particle size distribution of the ore entering a process."
-Product Size,"The final particle size distribution after processing."
+ID,Description,Unit
+Bond Work Index,A measure of ore hardness used to estimate energy requirements for grinding.,
+Comminution,The process of reducing solid materials in size by crushing or grinding.,
+Liberation,The degree to which valuable minerals are separated from gangue.,
+Throughput,The amount of material processed in a given period of time.,
+Feed_Size,The initial particle size distribution of the ore entering a process.,
+Product_Size,The final particle size distribution after processing.,

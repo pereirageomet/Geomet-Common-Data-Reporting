@@ -9,19 +9,41 @@ function loadMarkdown(id, filePath) {
     })
     .then(text => {
       const container = document.getElementById(id);
-      if (container) {
-        container.innerHTML = marked.parse(text);
-      }
+      if (container) container.innerHTML = marked.parse(text);
     })
     .catch(err => console.error(err));
 }
 
 // ------------------------------
+// Helper: Load CSV via PapaParse
+// ------------------------------
+function loadCSV(path) {
+  return new Promise(resolve => {
+    Papa.parse(path, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: results => resolve(results.data || [])
+    });
+  });
+}
+
+// Pick a field by possible header names (for glossary.csv)
+function pickField(row, candidates) {
+  for (const c of candidates) if (row[c] != null) return row[c].trim();
+  const lower = Object.fromEntries(Object.entries(row).map(([k, v]) => [k.toLowerCase(), v]));
+  for (const c of candidates) if (lower[c.toLowerCase()] != null) return lower[c.toLowerCase()].trim();
+  return null;
+}
+
+// ------------------------------
 // Main initialization
 // ------------------------------
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-  // --- Dark mode toggle ---
+  // --------------------------
+  // Dark mode toggle
+  // --------------------------
   const darkModeToggle = document.getElementById("darkModeToggle");
   if (darkModeToggle) {
     darkModeToggle.addEventListener("click", () => {
@@ -30,11 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "☀️ Light Mode"
         : "🌙 Dark Mode";
     });
-  } else {
-    console.error("Dark mode button not found");
   }
 
-  // --- Load Markdown sections ---
+  // --------------------------
+  // Load Markdown sections
+  // --------------------------
   loadMarkdown("intro-text", "text/intro.md");
   loadMarkdown("glossary-expl", "text/glossary_expl.md");
   loadMarkdown("comminution-expl", "text/comminution_expl.md");
@@ -43,50 +65,126 @@ document.addEventListener("DOMContentLoaded", () => {
   loadMarkdown("mineralogy-expl", "text/mineralogy_expl.md");
   loadMarkdown("feedback-expl", "text/feedback_expl.md");
 
-  // --- Glossary fuzzy search ---
+  // --------------------------
+  // Build merged glossary
+  // --------------------------
   const glossaryTable = document.querySelector("#glossary-table tbody");
   const searchInput = document.getElementById("glossary-search");
+
   let glossaryData = [];
   let fuse = null;
 
-  Papa.parse("data/glossary.csv", {
-    download: true,
-    header: true,
-    complete: results => {
-      glossaryData = results.data.filter(row => row.Term && row.Definition);
+  const filesToLoad = [
+    { file: "data/glossary.csv", source: "glossary.csv", type: "glossary" },
+    { file: "data/comminution.csv", source: "comminution.csv", type: "guide" },
+    { file: "data/flotation.csv", source: "flotation.csv", type: "guide" },
+    { file: "data/leaching.csv", source: "leaching.csv", type: "guide" },
+    { file: "data/mineralogy.csv", source: "mineralogy.csv", type: "guide" }
+  ];
 
-      if (glossaryData.length === 0) {
-        glossaryTable.innerHTML = "<tr><td colspan='2'><em>No glossary data found.</em></td></tr>";
-        return;
-      }
+  const merged = [];
 
-      // Initialize Fuse.js for fuzzy search
-      fuse = new Fuse(glossaryData, {
-        keys: ["Term", "Definition"],
-        threshold: 0.4,
-        includeScore: true
-      });
+  for (const entry of filesToLoad) {
+    let rows = await loadCSV(entry.file);
 
-      // Add search input listener
-      searchInput.addEventListener("input", e => {
-        const query = e.target.value.trim();
-        glossaryTable.innerHTML = "";
+    rows.forEach(row => {
+      if (!row) return;
 
-        if (!query) return;
+      // Clean values
+      const keys = Object.keys(row);
+      const clean = {};
+      keys.forEach(k => clean[k.trim()] = (row[k] || "").toString().trim());
 
-        const results = fuse.search(query);
-        if (results.length === 0) {
-          glossaryTable.innerHTML = "<tr><td colspan='2'><em>No matches found.</em></td></tr>";
-          return;
+      if (entry.type === "glossary") {
+        // Flexible header names
+        const ID = pickField(clean, ["ID", "Term", "Parameter", "Name"]);
+        const Description = pickField(clean, ["Description", "Definition", "Desc"]);
+        const Unit = pickField(clean, ["Unit", "Units", "Unit(s)"]);
+
+        if (ID && Description) {
+          merged.push({
+            ID,
+            Description,
+            Unit: Unit || "",
+            Source: entry.source
+          });
         }
 
-        results.slice(0, 20).forEach(r => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `<td>${r.item.Term}</td><td>${r.item.Definition}</td>`;
-          glossaryTable.appendChild(tr);
-        });
-      });
+      } else {
+        // ---------------------------------------
+        // STRICT COLUMN MAPPING FOR GUIDE FILES:
+        // col2 → ID     (keys[1])
+        // col3 → Description (keys[2])
+        // col4 → Unit   (keys[3])
+        // ---------------------------------------
+        if (keys.length >= 4) {
+          const ID = clean[keys[1]];
+          const Description = clean[keys[2]];
+          const Unit = clean[keys[3]];
+
+          if (ID && Description) {
+            merged.push({
+              ID,
+              Description,
+              Unit: Unit || "",
+              Source: entry.source
+            });
+          }
+        }
+      }
+    });
+  }
+
+  glossaryData = merged;
+
+  if (!glossaryData.length) {
+    glossaryTable.innerHTML = "<tr><td colspan='4'><em>No glossary data available.</em></td></tr>";
+    return;
+  }
+
+  // --------------------------
+  // Initialize Fuse.js
+  // --------------------------
+  fuse = new Fuse(glossaryData, {
+    keys: ["ID", "Description", "Unit", "Source"],
+    threshold: 0.36,
+    ignoreLocation: true,
+    minMatchCharLength: 1
+  });
+
+  // Empty table until searching
+  glossaryTable.innerHTML = "<tr><td colspan='4'><em>Start typing to search…</em></td></tr>";
+
+  // --------------------------
+  // Search input
+  // --------------------------
+  searchInput.addEventListener("input", e => {
+    const query = e.target.value.trim();
+    glossaryTable.innerHTML = "";
+
+    if (!query) {
+      glossaryTable.innerHTML = "<tr><td colspan='4'><em>Start typing to search…</em></td></tr>";
+      return;
     }
+
+    const results = fuse.search(query);
+
+    if (!results.length) {
+      glossaryTable.innerHTML = "<tr><td colspan='4'><em>No matches found.</em></td></tr>";
+      return;
+    }
+
+    results.slice(0, 100).forEach(r => {
+      const item = r.item;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${item.ID}</td>
+        <td>${item.Description}</td>
+        <td>${item.Unit}</td>
+        <td><strong>${item.Source}</strong></td>
+      `;
+      glossaryTable.appendChild(tr);
+    });
   });
 
 });
